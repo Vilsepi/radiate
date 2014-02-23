@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Radiate</title>
+<!--<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/foundation/5.1.1/css/foundation.min.css" type="text/css" charset="utf-8" />-->
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="static/style.css" type="text/css" charset="utf-8" />
+<script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+<script>
+
+function refreshCards()
+{
+  $.get("/api/getCard/openweathermap", function(data) {
+    $( "#left_card" ).html(data);
+  });
+
+  $.get("/api/getCard/lissuscraper", function(data) {
+    $( "#right_card" ).html(data);
+  });
+}
+
+function updateClock()
+{
+  var today=new Date();
+  var h=today.getHours();
+  var m=today.getMinutes();
+  var s=today.getSeconds();
+
+  // add a zero in front of numbers<10
+  m=formatTime(m);
+  s=formatTime(s);
+  //document.getElementById('clock').innerHTML=h+":"+m+":"+s;
+  $('#clock').html(h+":"+m+":"+s);
+  //document.getElementById('timer').innerHTML=" refreshed " + pageAge + " seconds ago";
+
+  t=setTimeout(function(){updateClock()},500);
+}
+
+function formatTime(i)
+{
+  if (i<10) {
+    i="0" + i;
+  }
+  return i;
+}
+
+// TODO: setting global ajax config is not recommended
+$.ajaxSetup ({
+    cache: false
+});
+
+refreshCards();
+window.setInterval(function(){
+  refreshCards();
+}, 5000);
+
+var pageAge=0
+var maxAge=30
+
+updateClock();
+
+</script>
+
+</head>
+<body>
+
+<div class="row">
+  <div id="header" class="large-12 columns"><b id="clock"></b><i id="timer"></i></div>
+</div>
+
+<div class="row">
+  <div id="left_card" class="large-6 columns card"></div>
+  <div id="right_card" class="large-6 columns card"></div>
+</div>
+
+</body>
+</html>

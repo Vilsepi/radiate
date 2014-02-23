@@ -1,0 +1,13 @@
+{% for city in data %}
+    <h1>{{city.name}} <small class="timestamp low_priority">{{updated_at}}</small></h1>
+    <br>
+    <em class="big_metrics">{{city.main.temp|round|int}}&deg;C</em><br>
+    <small class="small_metrics">{{city.main.temp_min|round|int}} &ndash; {{city.main.temp_max|round|int}} &deg;C</small>
+    <br><br>
+    <table>
+        <tr><td>Ilma</td><td>{{city.main.humidity}} %, {{city.main.pressure|round|int}} hPa</td></tr>
+        <tr><td>Valo</td><td>{{sunrise}}&ndash;{{sunset}}</td></tr>
+        <tr><td>Tuuli</td><td>{{city.wind.speed|round|int}} m/s, {{city.wind.deg|round|int}}&deg;</td></tr>
+    </table>
+{% endfor %}
+<div class="source">Weather data provided by <a href="http://openweathermap.org/">OpenWeatherMap</a></div>

@@ -11,14 +11,15 @@ function refreshCards()
 
 function updateClock()
 {
-  var today=new Date();
-  var h=today.getHours();
-  var m=today.getMinutes();
-  var s=today.getSeconds();
+  var date=new Date();
+  var h=date.getHours();
+  var m=date.getMinutes();
+  var s=date.getSeconds();
 
   m=formatTime(m);
   s=formatTime(s);
   $('#clock').html(h+":"+m);
+  $('#date').html(date.getDate() + "." + date.getMonth() + "." + date.getFullYear());
 
   t=setTimeout(function(){updateClock()},500);
 }

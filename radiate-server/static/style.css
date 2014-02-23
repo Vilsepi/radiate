@@ -1,72 +1,62 @@
 body {
-    margin-top: 20px;
-    margin-left: 100px;
-    font-size: 2.5em;
+    margin-top: 0px;
+    margin-left: 120px;
+    font-size: 2.7em;
     font-family: 'Open Sans', Verdana, sans-serif;
     font-weight: 300;
-    background: #161616;
+    background: #161610;
     color: #ccb;
 }
-#header {
-    margin-bottom: 40px;
-}
-#clock {
-    font-size: 1.7em;
-    font-weight: 300;
-}
-#timer {
-    opacity: 0.3;
-    font-size: 0.8em;
-}
-div.card {
-    float: left;
-    width: 590px;
-    /*border: 1px solid black;*/
-    margin-right: 20px;
-}
+
 h1 {
     color: #b23ad4;
     font-size: 1em;
     font-weight: normal;
-    margin: 0;
+    margin: 5px 0 5px 0;
 }
-table {
-    margin: 8px 0 8px 0;
+
+.footer {
+    position: fixed;
+    bottom: 10px;
 }
+
+.low_priority {
+    opacity: 0.4;
+    font-size: 0.45em;
+}
+
+#clock {
+    font-size: 1.7em;
+    font-weight: 300;
+}
+
+div.card {
+    float: left;
+    width: 580px;
+    margin-right: 30px;
+}
+
 td {
-    padding: 1px 22px 1px 22px;
+    padding: 0px 22px 0px 22px;
 }
+
 .center {
     text-align: center;
 }
-.align_col {
+
+/* Lissu-specific */
+.align_columns {
     width: 80px;
 }
-.low_priority {
-    color: #bb63d4;
-    opacity: 0.5;
-    font-size: 0.6em;
-}
+
 .opa_slight {
-    opacity: 0.8;
+    opacity: 0.7;
 }
-em.big_metrics {
-    margin-left: 50px;
+
+/* Weather-specific */
+div.big_metrics {
+    margin: 70px 0 70px 120px;
     color: #bb63d4;
     font-style: normal;
-    font-size: 2.3em;
-}
-small.small_metrics {
-    margin-left: 50px;
-    color: #b23ad4;
-    font-size: 0.8em;
-}
-
-.source {
-    color: #666;
-    font-size: 0.5em;
-}
-
-a {
-    color: #666;
+    font-size: 2.9em;
 }

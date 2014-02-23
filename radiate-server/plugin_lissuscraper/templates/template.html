@@ -3,8 +3,8 @@
     
     <table>
     {% for bus in stop.next_buses %}
-        <tr class='center'><td class='align_col'>{{bus.line}}</td><td>{{bus.eta1}}</td><td class="opa_slight">{{bus.eta2}}</td></tr>
+        <tr class='center'><td class='align_columns'>{{bus.line}}</td><td>{{bus.eta1}}</td><td class="opa_slight">{{bus.eta2}}</td></tr>
     {% endfor %}
     </table>
 {% endfor %}
-<div class="source">Bus data provided by <a href="http://joukkoliikenne.tampere.fi/">Tampereen joukkoliikenne</a></div>
+<div class="footer low_priority">Bus data provided by Tampereen joukkoliikenne</div>

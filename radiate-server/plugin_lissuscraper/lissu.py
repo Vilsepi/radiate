@@ -16,6 +16,10 @@ log.setLevel(logging.DEBUG)
 # Specify bus stops here you wish to monitor
 BUS_STOPS = ['3733', '3523']
 
+env = Environment(loader=PackageLoader(__name__, 'templates'))
+template = env.get_template('template.html')
+
+
 def _get_data_for_bus_stop(stop_id):
 
     try:
@@ -59,9 +63,6 @@ def get_card():
         if __name__ == "plugin_lissuscraper.lissu":
             CACHE_PATH = "plugin_lissuscraper/cache_lissu"
         requests_cache.install_cache(CACHE_PATH, backend='sqlite', expire_after=15)
-
-        env = Environment(loader=PackageLoader(__name__, 'templates'))
-        template = env.get_template('template.html')
 
         bus_stops_data = map(_get_data_for_bus_stop, BUS_STOPS)
 

@@ -19,7 +19,7 @@ function updateClock()
   m=formatTime(m);
   s=formatTime(s);
   $('#clock').html(h+":"+m);
-  $('#date').html(date.getDate() + "." + date.getMonth() + "." + date.getFullYear());
+  $('#date').html(date.getDate() + "." + (date.getMonth()+1) + "." + date.getFullYear());
 
   t=setTimeout(function(){updateClock()},500);
 }

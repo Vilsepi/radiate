@@ -16,11 +16,6 @@ log.setLevel(logging.DEBUG)
 # Specify cities here you wish to monitor
 CITIES = ['Tampere,FI']
 
-CACHE_PATH = "cache_weather"
-if __name__ == "plugin_openweathermap.weather":
-    CACHE_PATH = "plugin_openweathermap/cache_weather"
-requests_cache.install_cache(CACHE_PATH, backend='sqlite', expire_after=600)
-
 env = Environment(loader=PackageLoader(__name__, 'templates'))
 template = env.get_template('template.html')
 
@@ -49,6 +44,11 @@ def _get_weather_for_city(location):
 def get_card():
 
     try:
+        CACHE_PATH = "cache_weather"
+        if __name__ == "plugin_openweathermap.weather":
+            CACHE_PATH = "plugin_openweathermap/cache_weather"
+        requests_cache.install_cache(CACHE_PATH, backend='sqlite', expire_after=600)
+
         weather_data = map(_get_weather_for_city, CITIES)
 
         # TODO: This currently shows the same info for all cities as the first city

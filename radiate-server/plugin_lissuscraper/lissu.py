@@ -16,15 +16,6 @@ log.setLevel(logging.DEBUG)
 # Specify bus stops here you wish to monitor
 BUS_STOPS = ['3733', '3523']
 
-CACHE_PATH = "cache_lissu"
-if __name__ == "plugin_lissuscraper.lissu":
-    CACHE_PATH = "plugin_lissuscraper/cache_lissu"
-requests_cache.install_cache(CACHE_PATH, backend='sqlite', expire_after=15)
-
-env = Environment(loader=PackageLoader(__name__, 'templates'))
-template = env.get_template('template.html')
-
-
 def _get_data_for_bus_stop(stop_id):
 
     try:
@@ -54,7 +45,7 @@ def _get_data_for_bus_stop(stop_id):
     except Exception, err:
         log.error(err)
         stop_name = 'Stop ID ' + stop_id
-        updated_at = ''
+        updated_at = '-'
         line_list = {'line': 'ERR', 'destination': 'Error', 'eta1': '', 'eta2': ''}
 
     return {'stop_name': stop_name, 'updated_at': updated_at, 'next_buses': line_list}
@@ -64,6 +55,14 @@ def _get_data_for_bus_stop(stop_id):
 def get_card():
 
     try:
+        CACHE_PATH = "cache_lissu"
+        if __name__ == "plugin_lissuscraper.lissu":
+            CACHE_PATH = "plugin_lissuscraper/cache_lissu"
+        requests_cache.install_cache(CACHE_PATH, backend='sqlite', expire_after=15)
+
+        env = Environment(loader=PackageLoader(__name__, 'templates'))
+        template = env.get_template('template.html')
+
         bus_stops_data = map(_get_data_for_bus_stop, BUS_STOPS)
 
         return template.render(data=bus_stops_data)

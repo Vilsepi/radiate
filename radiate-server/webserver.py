@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from flask import Flask
-import plugin_lissuscraper.lissu as lissu
+import plugin_tkl_lissu_scraper.lissu as lissu
 import plugin_openweathermap.weather as weather
 import plugin_test.test as test
 

@@ -1,13 +1,12 @@
-<h1>{{location}} <small class="timestamp low_priority">updated at</small></h1>
+<h1>{{location}} <small class="timestamp low_priority"></small></h1>
 
 <table>
 {% for fcast in data %}
   <tr>
-    <td>{{ fcast.time }}GMT</td>
+    <td>{{ fcast.time }}</td>
     <!--<td>{{ fcast.debug_time }}</td>-->
-    <!--<td>{{ fcast.icon }}</td>-->
-    <td>{{ fcast.text }}</td>
-    <td>{{ fcast.temp_avg|round|int }}&deg;C</td>
+    <td><img src="http://openweathermap.org/img/w/{{ fcast.icon }}.png"></td>
+    <td>{{ fcast.temp_min|round|int }}..{{ fcast.temp_max|round|int }}&deg;C</td>
   </tr>
 {% endfor %}
 </table>

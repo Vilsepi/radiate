@@ -14,7 +14,7 @@ log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
 
 # Specify cities here you wish to monitor
-CITY = 'Tampere,FI'
+CITY = 'Pirkkala,FI'
 
 env = Environment(loader=PackageLoader(__name__, 'templates'))
 template = env.get_template('template.html')
@@ -41,7 +41,6 @@ def _get_weather_for_city(location):
 
 # Filter data
 def _mangle_data(data):
-    # TODO wtf these timezones are so messed up in openweather
     obj = {}
     obj['time'] = str(datetime.fromtimestamp(data['dt']).strftime('%H:%M'))
     obj['debug_time'] = data['dt_txt']

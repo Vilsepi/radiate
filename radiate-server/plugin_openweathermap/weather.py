@@ -20,10 +20,9 @@ env = Environment(loader=PackageLoader(__name__, 'templates'))
 template = env.get_template('template.html')
 
 
-def _get_weather_for_city(location):
-
+# Helper for fetching json from url. Always returns valid JSON.
+def _get_json_data(url):
     try:
-        url = 'http://api.openweathermap.org/data/2.5/forecast?q=%s&units=metric' % location
         result = requests.get(url)
         log.debug('From cache: %s' % result.from_cache)
 
@@ -31,26 +30,19 @@ def _get_weather_for_city(location):
             log.error("Server returned %s" % result.status_code)
             raise Exception("Server returned %s" % result.status_code)
 
-        weather_data = result.json()
+        json_data = result.json()
 
     except Exception, err:
         log.error(err)
-        weather_data = {}
+        json_data = {}
 
-    return weather_data
+    return json_data
 
-# Filter data
-def _mangle_data(data):
-    obj = {}
-    obj['time'] = str(datetime.fromtimestamp(data['dt']).strftime('%H:%M'))
-    obj['debug_time'] = data['dt_txt']
-    obj['icon'] = data['weather'][0]['icon']
-    obj['temp_min'] = data['main']['temp_min']
-    obj['temp_avg'] = (data['main']['temp_max'] + data['main']['temp_min'])/2
-    obj['temp_max'] = data['main']['temp_max']
-    obj['text'] = data['weather'][0]['main']
-    return obj
-
+# Simplify weather data before presentation
+def _enrich_weather_data(data):
+    data['dt_time'] = str(datetime.fromtimestamp(data['dt']).strftime('%d.%m. %H:%M'))
+    data['temp_avg'] = (data['main']['temp_max'] + data['main']['temp_min'])/2
+    return data
 
 # Return display-ready card in HTML
 def get_card():
@@ -61,11 +53,13 @@ def get_card():
             CACHE_PATH = "plugin_openweathermap/cache_weather"
         requests_cache.install_cache(CACHE_PATH, backend='sqlite', expire_after=900)
 
-        weather_data = _get_weather_for_city(CITY)
-	mangled_data = map(_mangle_data, weather_data['list'])
-	location = weather_data['city']['name']
+        forecast_data = _get_json_data('http://api.openweathermap.org/data/2.5/forecast?q={0}&units=metric'.format(CITY))
+        current_data = _get_json_data('http://api.openweathermap.org/data/2.5/weather?q={0}&units=metric'.format(CITY))
 
-        return template.render(location=location, data=mangled_data[:8])
+        forecast_data['list'] = map(_enrich_weather_data, forecast_data['list'])
+	current_data = _enrich_weather_data(current_data)
+
+        return template.render(current=current_data, forecast=forecast_data['list'][:8])
 
     except Exception, err:
         log.error(err)

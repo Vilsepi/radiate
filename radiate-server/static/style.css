@@ -59,3 +59,7 @@ div.big_metrics {
     font-style: normal;
     font-size: 2.9em;
 }
+
+.middle {
+    vertical-align: middle;
+}

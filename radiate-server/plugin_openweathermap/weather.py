@@ -40,7 +40,7 @@ def _get_json_data(url):
 
 # Simplify weather data before presentation
 def _enrich_weather_data(data):
-    data['dt_time'] = str(datetime.fromtimestamp(data['dt']).strftime('%d.%m. %H:%M'))
+    data['dt_time'] = str(datetime.fromtimestamp(data['dt']).strftime('%H:%M'))
     data['temp_avg'] = (data['main']['temp_max'] + data['main']['temp_min'])/2
     return data
 

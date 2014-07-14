@@ -59,6 +59,10 @@ def get_card():
         forecast_data['list'] = map(_enrich_weather_data, forecast_data['list'])
 	current_data = _enrich_weather_data(current_data)
 
+	# Remove past forecast
+	if current_data['dt'] >= forecast_data['list'][0]['dt']:
+            forecast_data['list'].pop(0)
+
         return template.render(current=current_data, forecast=forecast_data['list'][:8])
 
     except Exception, err:

@@ -1,0 +1,9 @@
+[Core]
+Name = test
+Module = plugin_test
+
+[Documentation]
+Description = A minimal example plugin
+Author = Vilsepi
+Version = 1.0
+Website = http://heap.fi

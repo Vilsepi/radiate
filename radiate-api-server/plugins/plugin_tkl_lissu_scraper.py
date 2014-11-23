@@ -1,7 +1,4 @@
 #!/usr/bin/env python
-#
-# Scrapes Lissu http://lissu.tampere.fi/
-#
 
 from yapsy.IPlugin import IPlugin
 from bs4 import BeautifulSoup
@@ -10,17 +7,37 @@ import requests
 import requests_cache
 import json
 import logging
+import re
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
 
 class LissuScrape(IPlugin):
+    """ Scrapes Lissu http://lissu.tampere.fi/ """
 
     def __init__(self): 
         cache_path = "plugins/" + __name__
         requests_cache.install_cache(cache_path, backend='sqlite', expire_after=7200)
         log.debug("Installed cache")
+
+    def _enrich_estimate(self, time_string):
+        """ Unify Lissu times which can be in '13 min', '07:33' or '07:33z' format"""
+        
+        time_object = {'source_time': time_string}
+        try:
+            time_schedule = re.search('\d\d:\d\d', time_string)
+            if time_schedule:
+                time_object['is_tracked'] = False
+                time_object['time'] = time_schedule.group(0)
+            time_estimate = re.search('(\d+) min', time_string)
+            if time_estimate:
+                time_object['is_tracked'] = True
+                time_object['estimate_minutes'] = time_estimate.group(1)
+        except IndexError:
+            log.error("Failed to parse times")
+
+        return time_object
 
     def _scrape_html_into_json(self, html_string):
         try:
@@ -35,7 +52,7 @@ class LissuScrape(IPlugin):
             # Lissu has an extra tr tag inside another tr which is not terminated
             for tr in scraped_soup.find_all("tr")[3:]:
                 keys = tr.find_all("td")
-                line_list.append({'line': keys[0].text, 'destination': keys[2].text, 'eta': [keys[3].text, keys[4].text]})
+                line_list.append({'line': keys[0].text, 'destination': keys[2].text, 'eta': map(self._enrich_estimate, [keys[3].text, keys[4].text])})
 
             return {'bus_stop_name': bus_stop_name, 'updated_at': updated_at, 'next_buses': line_list}
         except Exception, err:

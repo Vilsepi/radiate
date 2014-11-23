@@ -2,6 +2,13 @@
 
 ![radiate](screenshot.png)
 
+## Getting started
+
+    sudo apt-get install pip
+    sudo pip install -r requirements.txt
+    cd radiate-api-server
+    python apiserver.py
+
 ## Contributing
 
 Pull requests, especially new plugins are welcome.

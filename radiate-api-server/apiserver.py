@@ -2,6 +2,7 @@
 
 from flask import Flask
 from flask import request
+from flask.ext.cors import CORS
 from yapsy.PluginManager import PluginManager
 import config
 import json
@@ -21,6 +22,7 @@ for plugin in plugin_manager.getAllPlugins():
         print "Loaded plugin", plugin.name
 
 app = Flask(__name__)
+cors = CORS(app)
 
 @app.route("/api/", methods=['GET'])
 def list_active_plugins():

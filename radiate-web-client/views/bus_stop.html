@@ -1,0 +1,14 @@
+
+<h1>Bus info</h1>
+
+<div ng-repeat="stop in busStopData">
+  <h2>{{ stop.bus_stop_name }} ({{ stop.updated_at }})</h2>
+  <table class="table">
+    <tr ng-repeat="bus in stop.next_buses">
+      <td>{{ bus.line }}</td><td>{{ bus.destination }}</td><td ng-repeat="eta in bus.eta">{{ eta }}</td>
+    </tr>
+  </table>
+</div>
+
+<!--<h3>Debug</h3>
+<div>{{ busStopData }}</div>-->

@@ -9,10 +9,14 @@ angular.module('radiateApp')
       console.log(data)
 
       data["stops"].forEach(function(stop) {
-        stop["next_buses"].forEach(function(bus) {
-          bus["bus_stop_name"] = stop["bus_stop_name"]
-          bus["updated_at"] = stop["updated_at"]
-          $scope.busData.push(bus);
+        stop["next_buses"].forEach(function(bus_line) {
+          bus_line["eta"].forEach(function(bus) {
+            bus["bus_stop_name"] = stop["bus_stop_name"]
+            bus["updated_at"] = stop["updated_at"]
+            bus["line"] = bus_line["line"]
+            bus["destination"] = bus_line["destination"]
+            $scope.busData.push(bus);
+          });
         });
       });
       console.log($scope.busData);

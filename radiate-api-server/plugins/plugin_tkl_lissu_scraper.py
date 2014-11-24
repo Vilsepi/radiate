@@ -18,7 +18,7 @@ class LissuScrape(IPlugin):
 
     def __init__(self): 
         cache_path = "plugins/" + __name__
-        requests_cache.install_cache(cache_path, backend='sqlite', expire_after=7200)
+        requests_cache.install_cache(cache_path, backend='sqlite', expire_after=30)
         log.debug("Installed cache")
 
     def _get_minutes_until_time(self, time_string):
@@ -49,7 +49,7 @@ class LissuScrape(IPlugin):
                 time_estimate = re.search('(\d+) min', time_string)
                 if time_estimate:
                     time_object['is_tracked'] = True
-                    time_object['estimate_minutes'] = time_estimate.group(1)
+                    time_object['estimate_minutes'] = int(time_estimate.group(1))
         except IndexError:
             log.error("Failed to parse times")
 

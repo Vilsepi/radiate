@@ -2,12 +2,15 @@
 <h1>Bus info</h1>
 
 <table class="table">
-<tr ng-repeat="bus in busData">
+<tr ng-repeat="bus in busData|orderBy:'estimate_minutes'">
   <td>{{ bus.line }}</td>
-  <td ng-repeat="eta in bus.eta">{{ eta.source_time }}</td>
+  <td>{{ bus.estimate_minutes }}</td>
+  <td>{{ bus.is_tracked }}</td>
   <td>{{ bus.bus_stop_name }}</td>
   <td>{{ bus.destination }}</td>
-  <td>{{ bus.updated_at }}</td>
+  <td>{{ bus.time }}</td>
+  <td>{{ bus.source_time }}</td>
+  <td>({{ bus.updated_at }})</td>
 </tr>
 </table>
 

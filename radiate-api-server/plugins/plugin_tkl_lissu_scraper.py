@@ -35,6 +35,11 @@ class LissuScrape(IPlugin):
 
         return time_left.seconds/60
 
+    def _get_arrival_time_from_minutes_left(self, minutes_left):
+        """ Takes number of minutes to add to current time and returns the upcoming time as hh:mm string """
+        upcoming = datetime.datetime.now() + datetime.timedelta(minutes=minutes_left)
+        return upcoming.strftime("%H:%M")
+
     def _enrich_estimate(self, time_string):
         """ Unify Lissu times which can be in '13 min', '07:33' or '07:33z' format"""
         
@@ -49,6 +54,7 @@ class LissuScrape(IPlugin):
                 time_estimate = re.search('(\d+) min', time_string)
                 if time_estimate:
                     time_object['is_tracked'] = True
+                    time_object['time'] = self._get_arrival_time_from_minutes_left(int(time_estimate.group(1)))
                     time_object['estimate_minutes'] = int(time_estimate.group(1))
         except IndexError:
             log.error("Failed to parse times")
@@ -56,12 +62,11 @@ class LissuScrape(IPlugin):
         return time_object
 
     def _scrape_html_into_json(self, html_string):
-        #try:
+        try:
             scraped_soup = BeautifulSoup(html_string)
             bus_stop_info = scraped_soup.tr.find_all("td")
             bus_stop_name = bus_stop_info[0].text[:-7]
             updated_at = bus_stop_info[1].text[4:]
-
             line_list = []
 
             # Note: There is a layout bug in Lissu's HTML so there should be 2 instead of 3 here in sublist
@@ -71,8 +76,8 @@ class LissuScrape(IPlugin):
                 line_list.append({'line': keys[0].text, 'destination': keys[2].text, 'eta': map(self._enrich_estimate, [keys[3].text, keys[4].text])})
 
             return {'bus_stop_name': bus_stop_name, 'updated_at': updated_at, 'next_buses': line_list}
-        #except Exception, err:
-        #    return json.dumps({"status":"err","message":"Failed to scrape source html"})
+        except Exception, err:
+            return json.dumps({"status":"err","message":"Failed to scrape source html"})
 
     def _get_data_for_bus_stop(self, stop_id):
 
@@ -85,7 +90,7 @@ class LissuScrape(IPlugin):
             return self._scrape_html_into_json(result.text)
         else:
             log.error("Server returned %s" % result.status_code)
-                #raise Exception("Server returned %s" % result.status_code)
+            #raise Exception("Server returned %s" % result.status_code)
         #except Exception, err:
         #   log.error(err)
         #  return json.dumps({"status":"err","message":"Getting data from source server failed"})

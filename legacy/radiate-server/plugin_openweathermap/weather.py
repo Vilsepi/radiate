@@ -16,6 +16,7 @@ log.setLevel(logging.DEBUG)
 
 # Specify cities here you wish to monitor
 CITY = 'Pirkkala,FI'
+NUMBER_OF_FORECASTS = 8
 
 env = Environment(loader=PackageLoader(__name__, 'templates'))
 template = env.get_template('template.html')
@@ -68,7 +69,7 @@ def get_card():
 	if current_data['dt'] >= forecast_data['list'][0]['dt']:
             forecast_data['list'].pop(0)
 
-        return template.render(current=current_data, forecast=forecast_data['list'][:8])
+        return template.render(current=current_data, forecast=forecast_data['list'][:NUMBER_OF_FORECASTS-1])
 
     except socket.gaierror, err:
         log.error(err)

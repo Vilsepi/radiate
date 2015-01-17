@@ -2,9 +2,8 @@
 <tr>
   <td>{{ time }}</td>
   <td class="middle"><img src="http://openweathermap.org/img/w/{{ icon_id }}.png" width=50 height=50></td>
-  <td class="no_padding">{{ min|round|int }}</td>
-  <td class="no_padding">&ndash;</td>
-  <td class="no_padding">{{ max|round|int }}&deg;C</td>
+  <td>{{ max|round|int }} &deg;C</td>
+  <td class="low_priority">{{ min|round|int }} &deg;C</td>
 </tr>
 {%- endmacro %}
 

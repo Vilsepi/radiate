@@ -6,6 +6,7 @@
 import logging
 import requests
 import requests_cache
+import socket
 from datetime import datetime
 from jinja2 import Environment, PackageLoader
 
@@ -22,6 +23,8 @@ template = env.get_template('template.html')
 
 # Helper for fetching json from url. Always returns valid JSON.
 def _get_json_data(url):
+
+    json_data = {}
     try:
         result = requests.get(url)
         log.debug('From cache: %s' % result.from_cache)
@@ -32,9 +35,11 @@ def _get_json_data(url):
 
         json_data = result.json()
 
+    except requests.exceptions.ConnectionError, err:
+        log.error(err)
     except Exception, err:
         log.error(err)
-        json_data = {}
+        raise err
 
     return json_data
 
@@ -65,7 +70,7 @@ def get_card():
 
         return template.render(current=current_data, forecast=forecast_data['list'][:8])
 
-    except Exception, err:
+    except socket.gaierror, err:
         log.error(err)
         return "<h1>Card failed on top level</h1>"
 

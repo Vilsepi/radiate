@@ -1,0 +1,9 @@
+[Core]
+Name = tkl_lissu
+Module = plugin_tkl_lissu_scraper
+
+[Documentation]
+Description = A scraper for TKL bus stop schedules
+Author = Vilsepi
+Version = 0.1
+Website = http://heap.fi

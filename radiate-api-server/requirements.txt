@@ -1,0 +1,6 @@
+flask
+flask-cors
+requests
+requests_cache
+beautifulsoup4
+yapsy

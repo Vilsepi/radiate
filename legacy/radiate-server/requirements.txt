@@ -2,5 +2,3 @@ flask
 requests
 requests_cache
 beautifulsoup4
-
-

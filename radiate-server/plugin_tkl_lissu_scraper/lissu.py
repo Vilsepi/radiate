@@ -14,7 +14,7 @@ log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
 
 # Specify bus stops here you wish to monitor
-BUS_STOPS = ['3733', '3523']
+BUS_STOPS = ['3733', '3523','3737']
 
 env = Environment(loader=PackageLoader(__name__, 'templates'))
 template = env.get_template('template.html')

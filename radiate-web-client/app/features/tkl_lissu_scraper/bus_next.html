@@ -3,24 +3,24 @@
 
 <table class="table">
   <tr>
-    <th>line</th>
-    <th>minutes</th>
-    <th>time</th>
-    <th>stop name</th>
-    <th>gps</th>
+    <th>Line</th>
+    <th>Minutes</th>
+    <th>Arrival</th>
+    <th>Stop</th>
+    <!--<th>gps</th>
     <th>destination</th>
     <th>original time</th>
-    <th>data updated</th>
+    <th>data updated</th>-->
   </tr>
-  <tr ng-repeat="bus in busData|orderBy:'estimate_minutes'">
+  <tr ng-repeat="bus in buses|orderBy:'estimate_minutes'">
     <td>{{ bus.line }}</td>
     <td>{{ bus.estimate_minutes }}</td>
     <td>{{ bus.time }}</td>
     <td>{{ bus.bus_stop_name }}</td>
-    <td class="unimportant">{{ bus.is_tracked }}</td>
+    <!--<td class="unimportant">{{ bus.is_tracked }}</td>
     <td class="unimportant">{{ bus.destination }}</td>
     <td class="unimportant">{{ bus.source_time }}</td>
-    <td class="unimportant">({{ bus.updated_at }})</td>
+    <td class="unimportant">({{ bus.updated_at }})</td>-->
   </tr>
 </table>
 

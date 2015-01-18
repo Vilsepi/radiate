@@ -2,11 +2,10 @@
 angular.module('radiateApp')
   .controller('BusNextCtrl', ['$scope', '$http', function($scope, $http) {
 
-    $scope.apiUrl = "http://localhost:5000/api/tkl_lissu?stops=3733,3523,3737";
-    $scope.busData = new Array();
+    var apiUrl = "http://localhost:5000/api/tkl_lissu?stops=3733,3523,3737";
+    var busData = [];
 
-    $http.get($scope.apiUrl).success(function(data){
-      console.log(data)
+    $http.get(apiUrl).success(function(data){
 
       data["stops"].forEach(function(stop) {
         stop["next_buses"].forEach(function(bus_line) {
@@ -15,11 +14,18 @@ angular.module('radiateApp')
             bus["updated_at"] = stop["updated_at"]
             bus["line"] = bus_line["line"]
             bus["destination"] = bus_line["destination"]
-            $scope.busData.push(bus);
+            busData.push(bus);
           });
         });
       });
-      console.log($scope.busData);
+      $scope.buses = busData;
     });
 
-  }]);
+  }])
+  .directive('busNext', function() {
+    return {
+      restrict: 'E',
+      templateUrl: 'features/tkl_lissu_scraper/bus_next.html'
+    };
+
+  });

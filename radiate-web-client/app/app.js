@@ -2,22 +2,15 @@
 
 angular
   .module('radiateApp', [
-  	'ui.router',
+    'ngRoute',
   ])
- .config(function ($urlRouterProvider, $stateProvider) {
-    $urlRouterProvider.otherwise('/');
-
-    $stateProvider
-      .state('main', {
-        url: '/',
-        views: {
-          "right": {
-              templateUrl: 'features/tkl_lissu_scraper/bus_next.html',
-              controller: 'BusNextCtrl'
-          },
-          "left": {
-              template: "<h1>Weather to be done</h1>"
-          }
-        }
+  .config(function ($routeProvider) {
+    $routeProvider
+      .when('/', {
+        templateUrl: 'features/main/main.html',
+        controller: 'MainCtrl'
       })
+      .otherwise({
+        redirectTo: '/'
+      });
   });

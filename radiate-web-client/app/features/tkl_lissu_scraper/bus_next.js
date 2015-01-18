@@ -21,11 +21,4 @@ angular.module('radiateApp')
       $scope.buses = busData;
     });
 
-  }])
-  .directive('busNext', function() {
-    return {
-      restrict: 'E',
-      templateUrl: 'features/tkl_lissu_scraper/bus_next.html'
-    };
-
-  });
+  }]);

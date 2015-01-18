@@ -1,5 +1,7 @@
-<div class="row">
-  <div ng-repeat="panel in panels">
-    <div class="col-sm-6" ng-include="panel.contentView"></div>
+<div class="container-fluid">
+  <div class="row">
+    <div ng-repeat="panel in panels">
+      <div class="col-sm-6 panel-card" ng-include="panel.contentView"></div>
+    </div>
   </div>
 </div>

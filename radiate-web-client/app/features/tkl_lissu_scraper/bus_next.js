@@ -6,7 +6,6 @@ angular.module('radiateApp')
     var busData = [];
 
     $http.get(apiUrl).success(function(data){
-
       data["stops"].forEach(function(stop) {
         stop["next_buses"].forEach(function(bus_line) {
           bus_line["eta"].forEach(function(bus) {

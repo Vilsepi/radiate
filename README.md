@@ -4,10 +4,30 @@
 
 ## Getting started
 
+### For the new, under-development version
+
     sudo apt-get install pip
+    cd radiate-api-server/
     sudo pip install -r requirements.txt
-    cd radiate-api-server
     python apiserver.py
+
+    cd radiate-web-client/
+    python -m SimpleHTTPServer
+
+### For the working legacy version
+
+    sudo apt-get install pip
+    cd legacy/radiate-server/
+    sudo pip install -r requirements.txt
+    python webserver.py
+
+    sudo apt-get install google-chrome x11-xserver-utils, unclutter
+    # allow all users to start X session
+    sudo dpkg-reconfigure x11-common
+    cd legacy/radiate-client/
+    ./radiate-client.sh
+
+For background service that start on server boot, check the upstart job examples.
 
 ## Contributing
 

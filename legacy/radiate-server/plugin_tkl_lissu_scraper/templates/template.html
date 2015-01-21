@@ -1,9 +1,10 @@
 {% for stop in data %}
     <h1>{{stop.stop_name}} <small class="timestamp low_priority">{{stop.updated_at}}</small></h1>
-    
     <table>
     {% for bus in stop.next_buses %}
-        <tr class='center'><td class='align_columns'>{{bus.line}}</td><td>{{bus.eta1}}</td><td class="opa_slight">{{bus.eta2}}</td></tr>
+        {% if bus.favorite %}
+            <tr class='center'><td class='align_columns'>{{bus.line}}</td><td>{{bus.eta1}}</td><td class="opa_slight">{{bus.eta2}}</td></tr>
+        {% endif %}
     {% endfor %}
     </table>
 {% endfor %}

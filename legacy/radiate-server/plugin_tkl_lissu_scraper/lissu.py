@@ -13,8 +13,9 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 log = logging.getLogger(__name__)
 log.setLevel(logging.DEBUG)
 
-# Specify bus stops here you wish to monitor
+# Specify which bus stops and lines you wish to monitor
 BUS_STOPS = ['3733', '3523','3737']
+BUS_LINES = ['3','4','13','20']
 
 env = Environment(loader=PackageLoader(__name__, 'templates'))
 template = env.get_template('template.html')
@@ -43,8 +44,10 @@ def _get_data_for_bus_stop(stop_id):
         # Lissu has an extra tr tag inside another tr which is not terminated
         for tr in scraped_soup.find_all("tr")[3:]:
             keys = tr.find_all("td")
-            # TODO compare busline for list of favorites and add favorite boolean to dict
-            line_list.append({'line': keys[0].text, 'destination': keys[2].text, 'eta1': keys[3].text, 'eta2': keys[4].text})
+            line_info = {'line': keys[0].text, 'destination': keys[2].text, 'eta1': keys[3].text, 'eta2': keys[4].text}
+            if line_info['line'] in BUS_LINES:
+                line_info['favorite'] = True
+            line_list.append(line_info)
 
     except Exception, err:
         log.error(err)

@@ -4,15 +4,15 @@ body {
     font-size: 2.4em;
     font-family: 'Open Sans', Verdana, sans-serif;
     font-weight: 300 !important;
-    background: #161610;
+    background: #151510;
     color: #ccb;
 }
 
 h1 {
-    color: #b23ad4;
+    color: #9044d4;
     font-size: 1em;
     font-weight: normal;
-    margin: 5px 0 5px 0;
+    margin: 10px 0 7px 0;
 }
 
 .footer {
@@ -22,7 +22,7 @@ h1 {
 
 .low_priority {
     opacity: 0.5;
-    font-size: 0.6em;
+    font-size: 0.5em;
 }
 
 #header {
@@ -49,12 +49,16 @@ td.no_padding {
 }
 
 /* Lissu-specific */
-.align_columns {
+.col_busline {
     width: 80px;
 }
 
+.col_buseta {
+    width: 140px;
+}
+
 .opa_slight {
-    opacity: 0.7;
+    opacity: 0.6;
 }
 
 /* Weather-specific */

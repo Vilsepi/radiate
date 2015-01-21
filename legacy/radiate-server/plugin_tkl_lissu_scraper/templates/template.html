@@ -3,7 +3,11 @@
     <table>
     {% for bus in stop.next_buses %}
         {% if bus.favorite %}
-            <tr class='center'><td class='align_columns'>{{bus.line}}</td><td>{{bus.eta1}}</td><td class="opa_slight">{{bus.eta2}}</td></tr>
+            <tr class="center">
+                <td class="col_busline">{{bus.line}}</td>
+                <td class="col_buseta">{{bus.eta1}}</td>
+                <td class="col_buseta opa_slight">{{bus.eta2}}</td>
+            </tr>
         {% endif %}
     {% endfor %}
     </table>

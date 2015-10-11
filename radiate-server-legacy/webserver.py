@@ -25,4 +25,4 @@ def api_get_card(card_name):
         return "Could not serve card {0}".format(card_name)
 
 if(__name__ == "__main__"):
-    app.run(host='0.0.0.0', port=9000, debug=True)
+    app.run(host='0.0.0.0', port=8000, debug=True)

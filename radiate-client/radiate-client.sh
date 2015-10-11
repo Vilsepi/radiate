@@ -6,7 +6,7 @@
 #   or alternatively start the xinit with sudo
 #
 
-default_url="http://localhost:9000"
+default_url="http://localhost:8000"
 resolution="1366,768"
 browser_path="/usr/bin/google-chrome"
 

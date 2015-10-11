@@ -1,0 +1,34 @@
+<!doctype html>
+<html ng-app="radiateApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Radiate</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/assets/styles/main.css">
+  </head>
+  <body>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-12 panel-card" ng-include="'static/features/header/header.html'"></div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12 panel-card" ng-include="'static/features/tkl_lissu_scraper/bus_stop.html'"></div>
+      </div>
+    </div>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular-route.min.js"></script>
+    
+    <script src="static/app.js"></script>
+    <script src="static/features/header/header.js"></script>
+    <script src="static/features/tkl_lissu_scraper/bus_stop.js"></script>
+    <script src="static/features/tkl_lissu_scraper/bus_next.js"></script>
+    <script src="static/features/demo/demo.js"></script>
+    
+  </body>
+</html>

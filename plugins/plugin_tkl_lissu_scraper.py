@@ -16,9 +16,9 @@ log.setLevel(logging.DEBUG)
 class LissuScrape(IPlugin):
     """ Scrapes Lissu http://lissu.tampere.fi/ """
 
-    def __init__(self): 
+    def __init__(self):
         cache_path = "plugins/" + __name__
-        requests_cache.install_cache(cache_path, backend='sqlite', expire_after=30)
+        requests_cache.install_cache(cache_path, backend='memory', expire_after=30)
         log.debug("Installed cache")
 
     def _get_minutes_until_time(self, time_string):
@@ -42,7 +42,7 @@ class LissuScrape(IPlugin):
 
     def _enrich_estimate(self, time_string):
         """ Unify Lissu times which can be in '13 min', '07:33' or '07:33z' format"""
-        
+
         time_object = {'source_time': time_string}
         try:
             time_schedule = re.search('\d\d:\d\d', time_string)
@@ -77,23 +77,23 @@ class LissuScrape(IPlugin):
 
             return {'bus_stop_name': bus_stop_name, 'updated_at': updated_at, 'next_buses': line_list}
         except Exception, err:
-            return json.dumps({"status":"err","message":"Failed to scrape source html"})
+            return json.dumps({"status":"error","message":"Failed to scrape source html"})
 
     def _get_data_for_bus_stop(self, stop_id):
 
-        #try:
-        source_url = "http://lissu.tampere.fi/monitor.php?stop=" + stop_id
-        result = requests.get(source_url)
-        log.debug("From cache: %s" % result.from_cache)
+        try:
+            source_url = "http://lissu.tampere.fi/monitor.php?stop=" + stop_id
+            result = requests.get(source_url)
+            log.debug("From cache: %s" % result.from_cache)
 
-        if result.status_code == 200 and result.text:
-            return self._scrape_html_into_json(result.text)
-        else:
-            log.error("Server returned %s" % result.status_code)
-            #raise Exception("Server returned %s" % result.status_code)
-        #except Exception, err:
-        #   log.error(err)
-        #  return json.dumps({"status":"err","message":"Getting data from source server failed"})
+            if result.status_code == 200 and result.text:
+                return self._scrape_html_into_json(result.text)
+            else:
+                log.error("Server returned %s" % result.status_code)
+                raise Exception("Server returned %s" % result.status_code)
+        except Exception, err:
+            log.error(err)
+            return json.dumps({"status": "error", "message": err})
 
     def get_data(self, args):
         try:
@@ -102,10 +102,10 @@ class LissuScrape(IPlugin):
                     bus_stops = [stop.strip() for stop in args.get('stops').split(',')]
                     bus_stops_data = map(self._get_data_for_bus_stop, bus_stops)
                     return json.dumps({"status": "ok", "stops": bus_stops_data})
-            return json.dumps({"status": "err", "message": "Pass the bus stops as urls params"})
+            return json.dumps({"status": "error", "message": "Pass the bus stop ids as url param stops"})
         except Exception, err:
             log.error(err)
-            return json.dumps({"status": "err", "message": "Lissu plugin failed"})
+            return json.dumps({"status": "error", "message": err})
 
 if(__name__ == "__main__"):
     print get_data()

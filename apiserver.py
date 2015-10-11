@@ -19,17 +19,17 @@ plugin_manager.collectPlugins()
 for plugin in plugin_manager.getAllPlugins():
     if plugin.name in config.active_plugins:
         plugin_manager.activatePluginByName(plugin.name)
-        print "Loaded plugin", plugin.name
+        log.info("Loaded plugin {}".format(plugin.name))
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
 cors = CORS(app)
 
-@app.route("/api/", methods=['GET'])
+@app.route("/api", methods=['GET'])
 def list_active_plugins():
     plugins = []
     for plugin in plugin_manager.getAllPlugins():
         plugins.append(plugin.name)
-    return json.dumps({"plugins":plugins})
+    return json.dumps({"status": "info", "plugins": plugins})
 
 @app.route("/api/<plugin>", methods=['GET'])
 def call_plugin(plugin):
@@ -37,12 +37,12 @@ def call_plugin(plugin):
         pluginInfo = plugin_manager.getPluginByName(plugin)
         if pluginInfo:
             return pluginInfo.plugin_object.get_data(request.args)
-    return "Plugin {0} does not exist or is not active".format(plugin)
+    return json.dumps({"status": "error", "message": "Plugin {0} does not exist or is not active".format(plugin)})
 
-@app.route('/', defaults={'path': ''}, methods=['GET'])
-@app.route('/<path:path>', methods=['GET'])
-def catch_all(path):
-    return 'Try /api/test'
+@app.route("/")
+def root():
+    return app.send_static_file('index.html')
 
 if(__name__ == "__main__"):
     app.run(host=config.app_host, port=config.app_port, debug=config.app_debug)
+

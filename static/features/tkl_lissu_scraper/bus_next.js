@@ -2,7 +2,7 @@
 angular.module('radiateApp')
   .controller('BusNextCtrl', ['$scope', '$http', function($scope, $http) {
 
-    var apiUrl = "http://localhost:5000/api/tkl_lissu?stops=3733,3523,3737";
+    var apiUrl = "/api/tkl_lissu?stops=3733,3523,3737";
     var busData = [];
 
     // TODO: This should be done on the backend, i.e. provide list of next buses for given stops

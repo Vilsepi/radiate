@@ -1,23 +1,28 @@
 <div ng-controller="OpenWeatherCtrl">
 
-  <h2>Current</h2>
-  Data from: {{ weatherData.current.dt*1000 | date:'HH:mm' }}<br>
-  Sun: {{ weatherData.current.sys.sunrise*1000 | date:'HH:mm' }}
+  <div class="chart">
+    <div class="ct-chart ct-golden-section"></div>
+  </div>
+
+  <h2>Current ({{ weatherData.current.dt*1000 | date:'HH:mm' }})</h2>
+  
   {{ weatherData.current.sys.sunset*1000 | date:'HH:mm' }}<br>
   
   Main: {{ weatherData.current.main.temp }}C
   (min: {{ weatherData.current.main.temp_min }}C)<br>
   Weather: {{ weatherData.current.weather }}<br>
+  
+  Daylight: {{ weatherData.current.sys.sunrise*1000 | date:'HH:mm' }}
   Wind: {{ weatherData.current.wind }}<br>
   Cloud: {{ weatherData.current.clouds }}<br>
   
-  <h2>Forecast</h2>
+  <!--<h2>Forecast</h2>
 
   <table class="table">
     <tr ng-repeat="forecast in weatherData.forecast.list">
       <td>{{ forecast.dt*1000 | date:'d.M HH:mm' }}</td>
       <td>{{ forecast.main.temp | number:0 }}</td>
     </tr>
-  </table>
+  </table>-->
 
 </div>

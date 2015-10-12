@@ -1,5 +1,5 @@
 
-active_plugins = ["test", "tkl_lissu"]
+active_plugins = ["test", "tkl_lissu", "openweathermap"]
 plugin_directories = ["plugins"]
 
 app_host = "0.0.0.0"

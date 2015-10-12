@@ -1,0 +1,11 @@
+<div ng-controller="OpenWeatherCtrl">
+
+  <h2>Current</h2>
+  {{ weatherData.current }}<br>
+  
+  <h2>Forecast</h2>
+  Message: {{ weatherData.forecast.message }}<br>
+
+  {{ weatherData.forecast.list[0] }}
+
+</div>

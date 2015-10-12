@@ -27,7 +27,7 @@ class OpenWeatherMap(IPlugin):
 
     def __init__(self):
         cache_path = "plugins/" + __name__
-        requests_cache.install_cache(cache_path, backend='memory', expire_after=30)
+        requests_cache.install_cache(cache_path, backend='memory', expire_after=600)
         log.debug("Installed cache")
 
     def _get_json_data(self, url):
@@ -59,15 +59,10 @@ class OpenWeatherMap(IPlugin):
         data['temp_avg'] = (data['main']['temp_max'] + data['main']['temp_min'])/2
         return data
 
-    def get_data(self):
+    def get_data(self, args):
         """ Return current weather and forecast in json, or json error object on error """
 
         try:
-            CACHE_PATH = "cache_weather"
-            if __name__ == "plugin_openweathermap.weather":
-                CACHE_PATH = "plugin_openweathermap/cache_weather"
-            requests_cache.install_cache(CACHE_PATH, backend='sqlite', expire_after=900)
-
             forecast_data = self._get_json_data('{}forecast?q={}&units=metric&appid={}'.format(REMOTE_API_BASE_URL, CITY, secret.remote_api_key))
             current_data = self._get_json_data('{}weather?q={}&units=metric&appid={}'.format(REMOTE_API_BASE_URL, CITY, secret.remote_api_key))
 

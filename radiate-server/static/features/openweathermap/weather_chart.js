@@ -19,6 +19,12 @@ angular.module('radiateApp')
           return;
         }
 
+        var weatherSeries = _.map(scope.data.forecast.list.slice(0,8), function (item) {
+          return {'x': item.dt, 'y': item.main.temp};
+        });
+
+        var currentSeries = [{'x': scope.data.current.dt, 'y': scope.data.current.main.temp}];
+
         element[0].innerHTML ='';
 
         var timeFixture = new Rickshaw.Fixtures.Time.Local();
@@ -26,43 +32,39 @@ angular.module('radiateApp')
           element: element[0],
           width: attrs.width,
           height: attrs.height,
-          series: [{data: scope.data, color: attrs.color}],
-          renderer: scope.renderer
+          dotSize: 8,
+          stroke: true,
+          preserve: true,
+          renderer: 'multi',
+          series: [
+            {
+              data: weatherSeries,
+              color: '#ccd',
+              renderer: 'line'
+            },
+            {
+              data: currentSeries,
+              color: '#dde',
+              renderer: 'scatterplot'
+            }
+          ]
         });
 
-        /*
-          graph = new Rickshaw.Graph( {
-            element: document.getElementById("chart"),
-            width: 900,
-            height: 500,
-            renderer: 'multi',
-            dotSize: 8,
-            stroke: true,
-            preserve: true,
-            series: [
-              {
-                data: seriesTemperatureForecast,
-                color: '#ccc',
-                renderer: 'line'
-              },
-              {
-                data: seriesTemperatureCurrent,
-                color: '#f00',
-                renderer: 'scatterplot'
-              },
-            ]
-          });
-        */
+        var customTimeFormatter = {
+          seconds: 3600 * 2,
+          formatter: function(d) { return d.toString().match(/(\d+:\d+):/)[1] }
+        }
 
         var xAxis = new Rickshaw.Graph.Axis.Time({
           graph: graph,
-          timeUnit: timeFixture.unit('hour')
+          timeUnit: customTimeFormatter,
+          timeFixture: timeFixture
         });
         xAxis.render();
 
         var yAxis = new Rickshaw.Graph.Axis.Y({
           graph: graph,
-          tickFormat: Rickshaw.Fixtures.Number.formatKMBT
+          tickFormat: function (d) { return d + ' C'; }
         });
         yAxis.render();
 

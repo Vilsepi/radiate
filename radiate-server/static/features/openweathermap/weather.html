@@ -1,19 +1,22 @@
 <div ng-controller="OpenWeatherCtrl">
 
-  <div id="chart_container">
-    <div id="y_axis"></div>
-    <div id="chart"></div>
-  </div>
+  <rickshaw-chart
+    data="weatherSeries"
+    color="white"
+    renderer="'line'"
+    width="750"
+    height="450"
+  ></rickshaw-chart>
 
   <h2>Current ({{ weatherData.current.dt*1000 | date:'HH:mm' }})</h2>
   
   Main: {{ weatherData.current.main.temp }}C
   (min: {{ weatherData.current.main.temp_min }}C)<br>
-  Weather: {{ weatherData.current.weather }}<br>
+  Weather: {{ weatherData.current.weather[0].description }}<br>
 
   Daylight: {{ weatherData.current.sys.sunrise*1000 | date:'HH:mm' }} - {{ weatherData.current.sys.sunset*1000 | date:'HH:mm' }}<br>
-  Cloud: {{ weatherData.current.clouds }}<br>
-  <!--Wind: {{ weatherData.current.wind }}<br>-->
+  <!--Cloud: {{ weatherData.current.clouds }}<br>
+  Wind: {{ weatherData.current.wind }}<br>-->
   
   <!--<h2>Forecast</h2>
 

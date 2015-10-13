@@ -27,6 +27,20 @@ td {
   border: 1px solid #444;
 }
 
+/* Rickshaw */
+
+.rickshaw_graph .x_tick .title {
+  /*opacity: 1 !important;
+  position: relative !important;*/
+  color: white;
+  margin-top: 10px;
+}
+/*.rickshaw_graph .y_ticks text {
+  opacity: 1 !important;
+  position: relative !important;
+}*/
+
+
 /* Chartist */
 .ct-label {
   color: #ccc;

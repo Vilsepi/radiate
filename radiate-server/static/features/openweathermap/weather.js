@@ -5,19 +5,25 @@ angular.module('radiateApp')
     var apiUrl = "/api/openweathermap";
     
     var timeFixture = new Rickshaw.Fixtures.Time.Local();
+    var seriesTemperatureForecast = [];
+    var seriesTemperatureCurrent = [];
+    var graph = null;
 
     $scope.getWeatherData = function(){
       $http.get(apiUrl).success(function(data){
         $scope.weatherData = data;
 
-        var temperatureData = _.map(data.forecast.list, function (item) {
+        seriesTemperatureForecast = _.map(data.forecast.list, function (item) {
           return {'x': item.dt, 'y': item.main.temp};
         });
-        temperatureData = temperatureData.slice(0,8);
 
+        // Only view one day TODO API should provide this
+        seriesTemperatureForecast = seriesTemperatureForecast.slice(0,8);
+
+        seriesTemperatureCurrent = [{'x': data.current.dt, 'y': data.current.main.temp}];
+        
         // TODO Move graph stuff out of http success and call graph update instead
-
-        var graph = new Rickshaw.Graph( {
+        graph = new Rickshaw.Graph( {
           element: document.getElementById("chart"),
           width: 900,
           height: 500,
@@ -27,38 +33,37 @@ angular.module('radiateApp')
           preserve: true,
           series: [
             {
-              data: temperatureData,
+              data: seriesTemperatureForecast,
               color: '#ccc',
               renderer: 'line'
             },
             {
-              data: [{'x': data.current.dt, 'y': data.current.main.temp}],
+              data: seriesTemperatureCurrent,
               color: '#f00',
               renderer: 'scatterplot'
             },
           ]
-        } );
-
-        graph.render();
+        });
+        //graph.render();
 
         var xAxis = new Rickshaw.Graph.Axis.Time({
             graph: graph,
             timeUnit: timeFixture.unit('3hour')
         });
-
         xAxis.render();
 
         var yAxis = new Rickshaw.Graph.Axis.Y( {
           graph: graph,
           tickFormat: Rickshaw.Fixtures.Number.formatKMBT
         } );
-
         yAxis.render();
+
+        graph.update();
 
       });
     };
 
     $scope.getWeatherData();
-    $interval($scope.getWeatherData, 60000);
+    $interval($scope.getWeatherData, 5000);
 
   }]);

@@ -3,14 +3,14 @@
   <rickshaw-chart
     data="weatherData"
     renderer="'line'"
-    width="750"
-    height="450"
+    width="680"
+    height="400"
   ></rickshaw-chart>
 
   <h2>Current weather ({{ weatherData.current.dt*1000 | date:'HH:mm' }})</h2>
   
   {{ weatherData.current.main.temp | number:0 }} &#176;C
-  (min: {{ weatherData.current.main.temp_min }} &#176;C)<br>
+  (lowest {{ weatherData.current.main.temp_min }} &#176;C)<br>
   {{ weatherData.current.weather[0].description }}<br>
 
   Daylight {{ weatherData.current.sys.sunrise*1000 | date:'HH:mm' }} – {{ weatherData.current.sys.sunset*1000 | date:'HH:mm' }}<br>

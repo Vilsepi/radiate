@@ -1,3 +1,4 @@
 *.sqlite
 *.pyc
 *secret.py
+test

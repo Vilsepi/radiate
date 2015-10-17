@@ -1,7 +1,7 @@
 <div ng-controller="BusStopCtrl">
 
   <div ng-repeat="stop in busStopData">
-    <h2>{{ stop.bus_stop_name }} ({{ stop.updated_at }})</h2>
+    <h2>{{ stop.bus_stop_name }} <span class="lighter">{{ stop.updated_at }}</span></h2>
     <table class="table">
       <tr ng-repeat="bus in stop.next_buses">
         <td class="bus-line-cell">{{ bus.line }}</td>

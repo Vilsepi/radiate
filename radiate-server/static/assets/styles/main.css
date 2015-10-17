@@ -1,59 +1,80 @@
 
 body {
   font-family: 'Open Sans', Verdana, sans-serif;
-  font-weight: 300 !important;
   background: #151510;
   color: #ddc;
+  font-size: 100%;
+  font-weight: 300;
 }
 
 h1 {
   color: #ddd;
-  font-size: 30px;
   margin: 0;
+  font-weight: 300;
+  font-size: 3em;
 }
 
 h2 {
   color: #9044d4;
-  font-weight: normal;
-  font-size: 22px;
+  font-weight: 300;
+  font-size: 28px;
   margin: 10px 0 7px 0;
 }
 
 p {
-  font-size: 22px;
+  font-size: 1em;
 }
 
 b {
   font-size: 1.2em;
 }
 
-.table > tbody > tr > td {
-  border: none;
-  padding: 0;
+.huge {
+  font-size: 3em;
 }
 
-td {
-  padding: 3px 12px;
-  border: none;
-  font-size: 30px;
-}
-
-.bus-line-cell {
-  text-align: center;
-  width: 40px;
-}
-
-.bus-eta-cell {
-  width: 80px;
-}
-
-.unimportant {
-  opacity: 0.5;
+.lighter {
+  font-size: 0.75em;
+  opacity: 0.7;
 }
 
 .panel-card {
-  border: 1px solid #222;
-  margin-top: 20px;
+  margin: 0;
+  padding: 20px;
+  display: block;
+  float: left;
+  width: 50%;;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.panel-header {
+  margin-bottom: 10px;
+}
+
+
+/* Bus specific */
+
+.bus-line-cell {
+  text-align: center;
+  width: 120px;
+}
+
+.bus-eta-cell {
+  width: 180px;
+}
+
+td {
+  padding: 1px 12px;
+  font-size: 46px;
+}
+
+
+/* Weather specific */
+
+.weather-chart {
+  margin: 30px 0 40px 0;
 }
 
 /* Rickshaw */
@@ -62,11 +83,9 @@ td {
 .rickshaw_graph .x_tick .title {
   opacity: 1 !important;
   position: absolute !important;
-  bottom: -20px;
-  /*color: white;*/
-  color: #ddd;
-  margin-top: 10px;
-  font-size: 18px;
+  bottom: -25px;
+  color: #aaa;
+  font-size: 16px;
   font-family: 'Open Sans', Verdana, sans-serif;
   font-weight: 300;
 }
@@ -81,11 +100,9 @@ td {
   opacity: 1;
   fill: #ddd;
   position: relative !important;
-  
 }
 
 /* y-axis dashes */
 .rickshaw_graph .y_grid .tick {
   stroke: rgba(255, 255, 255, 0.3);
 }
-

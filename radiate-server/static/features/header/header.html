@@ -1,3 +1,6 @@
 <div ng-controller="HeaderCtrl">
-  {{ clock | date:'dd.MM. HH:mm:ss'}}
+  <h1>
+    {{ clock | date:'HH:mm:ss'}}
+    <span class="lighter">{{ clock | date:'dd.MM.'}}</span>
+  </h1>
 </div>

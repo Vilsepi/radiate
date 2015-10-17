@@ -5,32 +5,21 @@
     <title>Radiate</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/chartist/0.9.4/chartist.min.css">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/rickshaw/1.5.1/rickshaw.min.css">
+    <link rel="stylesheet" href="static/assets/vendor/rickshaw.min.css">
     <link rel="stylesheet" href="static/assets/styles/main.css">
   </head>
   <body>
 
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-12 panel-card" ng-include="'static/features/header/header.html'"></div>
-      </div>
-      <div class="row">
-        <div class="col-sm-6 panel-card" ng-include="'static/features/openweathermap/weather.html'"></div>
-        <div class="col-sm-6 panel-card" ng-include="'static/features/tkl_lissu_scraper/bus_stop.html'"></div>
-      </div>
-    </div>
+    <div class="panel-header" ng-include="'static/features/header/header.html'"></div>
+    <div class="panel-card" ng-include="'static/features/openweathermap/weather.html'"></div>
+    <div class="panel-card" ng-include="'static/features/tkl_lissu_scraper/bus_stop.html'"></div>
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <!--
-    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
-    -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/rickshaw/1.5.1/rickshaw.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.7/angular.min.js"></script>
+    <script src="static/assets/vendor/jquery.min.js"></script>
+    <script src="static/assets/vendor/underscore-min.js"></script>
+    <script src="static/assets/vendor/d3.min.js"></script>
+    <script src="static/assets/vendor/rickshaw.min.js"></script>
+    <script src="static/assets/vendor/angular.min.js"></script>
+
     <script src="static/app.js"></script>
     <script src="static/features/header/header.js"></script>
     <script src="static/features/openweathermap/weather.js"></script>

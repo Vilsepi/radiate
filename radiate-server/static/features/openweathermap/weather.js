@@ -2,6 +2,7 @@ angular.module('radiateApp')
   .controller('OpenWeatherCtrl', ['$scope', '$http', '$interval', '$filter', function($scope, $http, $interval, $filter) {
 
     var apiUrl = "/api/openweathermap";
+    //var apiUrl = "/static/test/weather.json";
     
     $scope.getWeatherData = function(){
       $http.get(apiUrl).then(
@@ -14,6 +15,6 @@ angular.module('radiateApp')
     };
 
     $scope.getWeatherData();
-    $interval($scope.getWeatherData, 5000);
+    $interval($scope.getWeatherData, 60000);
 
   }]);

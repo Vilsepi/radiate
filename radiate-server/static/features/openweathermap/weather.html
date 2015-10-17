@@ -1,23 +1,25 @@
 <div ng-controller="OpenWeatherCtrl">
 
+  <h2>{{ weatherData.current.weather[0].description }} <span class="lighter">{{ weatherData.current.dt*1000 | date:'HH:mm' }}</span></h2>
   <div class="weather-chart">
   <rickshaw-chart
     data="weatherData"
     renderer="'line'"
-    width="620"
+    width="580"
     height="360"
   ></rickshaw-chart>
   </div>
 
-  <h2>{{ weatherData.current.weather[0].description }} <span class="lighter">{{ weatherData.current.dt*1000 | date:'HH:mm' }}</span></h2>
+  
   
   <p>
     <span class="huge">
       {{ weatherData.current.main.temp | number:0 }}<span class="lighter">&#176;C</span>
     </span>
-    (lowest {{ weatherData.current.main.temp_min }} &#176;C)
+    <!--(lowest {{ weatherData.current.main.temp_min }} &#176;C)
     <br>
-    Daylight {{ weatherData.current.sys.sunrise*1000 | date:'HH:mm' }} – {{ weatherData.current.sys.sunset*1000 | date:'HH:mm' }}
+    Daylight {{ weatherData.current.sys.sunrise*1000 | date:'HH:mm' }} – {{ weatherData.current.sys.sunset*1000 | date:'HH:mm' }}-->
   </p>
 
+<span class="footer">Weather data provided by Openweathermap</span>
 </div>

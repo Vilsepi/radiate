@@ -33,7 +33,7 @@ angular.module('radiateApp')
           width: attrs.width,
           height: attrs.height,
           dotSize: 8,
-          strokeWidth: 3,
+          strokeWidth: 4,
           stroke: true,
           preserve: true,
           renderer: 'multi',
@@ -42,11 +42,6 @@ angular.module('radiateApp')
               data: weatherSeries,
               color: '#bbbbbf',
               renderer: 'line'
-            },
-            {
-              data: currentSeries,
-              color: '#dde',
-              renderer: 'scatterplot'
             }
           ]
         });
@@ -54,6 +49,7 @@ angular.module('radiateApp')
         var customTimeFormatter = {
           seconds: 3600 * 2,
           formatter: function(d) { return d.toString().match(/(\d+:\d+):/)[1] }
+          //formatter: function(d) { return d.toString().match(/(\d+:\d+):/)[1] }
         }
 
         var xAxis = new Rickshaw.Graph.Axis.Time({
@@ -65,7 +61,7 @@ angular.module('radiateApp')
 
         var yAxis = new Rickshaw.Graph.Axis.Y({
           graph: graph,
-          tickFormat: function (d) { return d + ' C'; }
+          tickFormat: function (d) { return d + '°C'; }
         });
         yAxis.render();
 

@@ -33,13 +33,14 @@ angular.module('radiateApp')
           width: attrs.width,
           height: attrs.height,
           dotSize: 8,
+          strokeWidth: 3,
           stroke: true,
           preserve: true,
           renderer: 'multi',
           series: [
             {
               data: weatherSeries,
-              color: '#ccd',
+              color: '#bbbbbf',
               renderer: 'line'
             },
             {

@@ -4,8 +4,8 @@
     <h2>{{ stop.bus_stop_name }} ({{ stop.updated_at }})</h2>
     <table class="table">
       <tr ng-repeat="bus in stop.next_buses">
-        <td>{{ bus.line }}</td>
-        <td ng-repeat="eta in bus.eta">{{ eta.source_time }}</td>
+        <td class="bus-line-cell">{{ bus.line }}</td>
+        <td class="bus-eta-cell" ng-repeat="eta in bus.eta">{{ eta.source_time }}</td>
       </tr>
     </table>
   </div>

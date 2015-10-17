@@ -20,6 +20,6 @@ angular.module('radiateApp')
     };
 
     $scope.getBusStopData();
-    $interval($scope.getBusStopData, 10000);
+    $interval($scope.getBusStopData, 5000);
 
   }]);

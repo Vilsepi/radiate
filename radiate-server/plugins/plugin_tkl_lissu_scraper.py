@@ -18,7 +18,7 @@ class LissuScrape(IPlugin):
 
     def __init__(self):
         cache_path = "plugins/" + __name__
-        requests_cache.install_cache(cache_path, backend='memory', expire_after=30)
+        requests_cache.install_cache(cache_path, backend='memory', expire_after=25)
         log.debug("Installed cache")
 
     def _get_minutes_until_time(self, time_string):

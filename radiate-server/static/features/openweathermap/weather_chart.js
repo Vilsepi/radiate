@@ -19,7 +19,7 @@ angular.module('radiateApp')
           return;
         }
 
-        var weatherSeries = _.map(scope.data.forecast.list.slice(0,8), function (item) {
+        var weatherSeries = _.map(scope.data.forecast.list.slice(0,17), function (item) {
           return {'x': item.dt, 'y': item.main.temp};
         });
 
@@ -40,16 +40,17 @@ angular.module('radiateApp')
           series: [
             {
               data: weatherSeries,
-              color: '#bbbbbf',
+              color: '#ccb',
               renderer: 'line'
             }
           ]
         });
 
         var customTimeFormatter = {
-          seconds: 3600 * 2,
-          formatter: function(d) { return d.toString().match(/(\d+:\d+):/)[1] }
-          //formatter: function(d) { return d.toString().match(/(\d+:\d+):/)[1] }
+          seconds: 3600 * 6,
+          formatter: function(d) {
+            return d.toString().match(/(\d+):\d+:/)[1];
+          }
         }
 
         var xAxis = new Rickshaw.Graph.Axis.Time({
@@ -61,7 +62,7 @@ angular.module('radiateApp')
 
         var yAxis = new Rickshaw.Graph.Axis.Y({
           graph: graph,
-          tickFormat: function (d) { return d + '°C'; }
+          tickFormat: function (d) { return d; }
         });
         yAxis.render();
 

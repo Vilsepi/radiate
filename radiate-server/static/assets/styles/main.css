@@ -46,7 +46,7 @@ b {
 }
 
 .panel-header {
-  margin-left: 20px;
+  margin-left: 36px;
   margin-bottom: 5px;
 }
 
@@ -83,7 +83,7 @@ td {
 
 .huge {
   font-size: 7em;
-  margin-left: 10px;
+  margin-left: 8px;
 }
 
 .weather-chart {
@@ -109,8 +109,7 @@ td {
   font-size: 24px;
   font-family: 'Open Sans', Verdana, sans-serif;
   font-weight: 300;
-  margin-left: 3px;
-  bottom: -30px;
+  bottom: -34px;
   left: -17px;
 }
 

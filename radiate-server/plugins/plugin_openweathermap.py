@@ -55,6 +55,9 @@ class OpenWeatherMap(IPlugin):
     def _enrich_weather_data(self, data):
         """ Simplify weather data before presentation """
 
+        if data.get('weather'):
+            data['weather'][0]['description'] = data['weather'][0]['description'].capitalize()
+
         data['dt_time'] = str(datetime.fromtimestamp(data['dt']).strftime('%H:%M'))
         data['temp_avg'] = (data['main']['temp_max'] + data['main']['temp_min'])/2
         return data

@@ -11,7 +11,7 @@ import re
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 log = logging.getLogger(__name__)
-log.setLevel(logging.DEBUG)
+log.setLevel(logging.INFO)
 
 class LissuScrape(IPlugin):
     """ Scrapes Lissu http://lissu.tampere.fi/ """

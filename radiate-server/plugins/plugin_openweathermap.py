@@ -16,7 +16,7 @@ from jinja2 import Environment, PackageLoader
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 log = logging.getLogger(__name__)
-log.setLevel(logging.DEBUG)
+log.setLevel(logging.INFO)
 
 # Specify cities here you wish to monitor
 CITY = 'Tampere,FI'

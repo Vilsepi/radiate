@@ -11,7 +11,7 @@ h1 {
   color: #ddd;
   margin: 0;
   font-weight: 300;
-  font-size: 3em;
+  font-size: 3.5em;
 }
 
 h2 {
@@ -29,18 +29,14 @@ b {
   font-size: 1.2em;
 }
 
-.huge {
-  font-size: 7em;
-}
-
 .lighter {
-  font-size: 0.65em;
-  opacity: 0.5;
+  font-size: 0.6em;
+  opacity: 0.45;
 }
 
 .panel-card {
   margin: 0;
-  padding: 20px 40px;
+  padding: 5px 40px;
   display: block;
   float: left;
   width: 50%;;
@@ -51,13 +47,13 @@ b {
 
 .panel-header {
   margin-left: 20px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .footer {
   color: #333;
   position: absolute;
-  bottom: 15px;
+  bottom: 10px;
   width: 600px;
   text-align: center;
 }
@@ -66,24 +62,29 @@ b {
 
 .bus-line-cell {
   text-align: center;
-  width: 130px;
+  width: 150px;
 }
 
 .bus-eta-cell {
-  width: 200px;
+  width: 210px;
 }
 
 table {
-  margin: 12px 0 25px 0;
+  margin: 8px 0 25px 0;
 }
 
 td {
   padding: 1px 12px;
-  font-size: 48px;
+  font-size: 50px;
 }
 
 
 /* Weather specific */
+
+.huge {
+  font-size: 7em;
+  margin-left: 10px;
+}
 
 .weather-chart {
   margin: 25px 0 70px 0;

@@ -10,14 +10,11 @@
   ></rickshaw-chart>
   </div>
 
-  
-  
   <p>
     <span class="huge">
       {{ weatherData.current.main.temp | number:0 }}<span class="lighter">&#176;C</span>
     </span>
-    <!--(lowest {{ weatherData.current.main.temp_min }} &#176;C)
-    <br>
+    <!--
     Daylight {{ weatherData.current.sys.sunrise*1000 | date:'HH:mm' }} – {{ weatherData.current.sys.sunset*1000 | date:'HH:mm' }}-->
   </p>
 

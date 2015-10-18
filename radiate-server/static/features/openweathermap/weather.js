@@ -15,6 +15,6 @@ angular.module('radiateApp')
     };
 
     $scope.getWeatherData();
-    $interval($scope.getWeatherData, 60000);
+    $interval($scope.getWeatherData, 30000);
 
   }]);

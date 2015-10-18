@@ -27,7 +27,7 @@ class OpenWeatherMap(IPlugin):
 
     def __init__(self):
         cache_path = "plugins/" + __name__
-        requests_cache.install_cache(cache_path, backend='memory', expire_after=600)
+        requests_cache.install_cache(cache_path, backend='memory', expire_after=240)
         log.debug("Installed cache")
 
     def _get_json_data(self, url):

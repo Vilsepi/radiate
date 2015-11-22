@@ -91,6 +91,17 @@ td {
   border: 1px solid #222;
 }
 
+.weather-icons {
+  margin-left: -10px;
+  opacity: 0.8;
+}
+
+.weather-icon {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+
 /* Rickshaw */
 
 /* x-axis dashes */

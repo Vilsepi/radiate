@@ -9,6 +9,12 @@
     height="360"
   ></rickshaw-chart>
   </div>
+  
+  <div class="weather-icons">
+    <div class="weather-icon" ng-repeat="forecast in weatherData.forecast.list">
+      <img src="http://openweathermap.org/img/w/{{ forecast.weather[0].icon }}.png" width="35px">
+    </div>
+  </div>
 
   <p>
     <span class="huge">

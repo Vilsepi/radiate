@@ -4,9 +4,12 @@ angular.module('radiateApp')
     var apiUrl = "/api/openweathermap";
     //var apiUrl = "/static/test/weather-combined-2015-11-22.json";
     
+    var maxHistory = 17;
+
     $scope.getWeatherData = function(){
       $http.get(apiUrl).then(
         function successCallback(response) {
+          response.data.forecast.list = response.data.forecast.list.slice(0, maxHistory);
           $scope.weatherData = response.data;
         },
         function errorCallback(response) {

@@ -34,7 +34,7 @@ angular.module('radiateApp')
           return;
         }
 
-        var weatherSeries = _.map(scope.data.forecast.list.slice(0,17), function (item) {
+        var weatherSeries = _.map(scope.data.forecast.list, function (item) {
           return {'x': item.dt, 'y': item.main.temp};
         });
 

@@ -16,13 +16,13 @@
     </div>
   </div>
 
-  <p>
+  <div>
     <span class="huge">
       {{ weatherData.current.main.temp | number:0 }}<span class="lighter">&#176;C</span>
     </span>
     <!--
     Daylight {{ weatherData.current.sys.sunrise*1000 | date:'HH:mm' }} – {{ weatherData.current.sys.sunset*1000 | date:'HH:mm' }}-->
-  </p>
+  </div>
 
 <span class="footer">Weather data provided by Openweathermap</span>
 </div>

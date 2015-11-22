@@ -13,6 +13,21 @@ angular.module('radiateApp')
     restrict: 'E',
     link: function postLink(scope, element, attrs) {
 
+      // Helper to nicely fit the data series into the drawn range
+      function calculateRange(upperOrLower, series) {
+        if (upperOrLower === 'upper') {
+          highestPoint = _.max(_.pluck(series, 'y'))
+          return Math.ceil(highestPoint/5)*5;
+        }
+        else if (upperOrLower === 'lower') {
+          lowestPoint = _.min(_.pluck(series, 'y'))
+          return Math.floor(lowestPoint/5)*5;
+        }
+        else {
+          return 0;
+        }
+      }
+
       // Recreate chart when data changes
       scope.$watchCollection('[data, renderer]', function(newVal, oldVal){
         if(!newVal[0]){
@@ -37,6 +52,8 @@ angular.module('radiateApp')
           stroke: true,
           preserve: true,
           renderer: 'multi',
+          max: calculateRange('upper', weatherSeries),
+          min: calculateRange('lower', weatherSeries),
           series: [
             {
               data: weatherSeries,

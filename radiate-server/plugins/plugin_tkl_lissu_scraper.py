@@ -61,7 +61,7 @@ class LissuScrape(IPlugin):
 
         return time_object
 
-    def _scrape_html_into_json(self, html_string):
+    def _scrape_html_into_json(self, html_string, stop_id):
         try:
             scraped_soup = BeautifulSoup(html_string)
             bus_stop_info = scraped_soup.tr.find_all("td")
@@ -75,7 +75,7 @@ class LissuScrape(IPlugin):
                 keys = tr.find_all("td")
                 line_list.append({'line': keys[0].text, 'destination': keys[2].text, 'eta': map(self._enrich_estimate, [keys[3].text, keys[4].text])})
 
-            return {'bus_stop_name': bus_stop_name, 'updated_at': updated_at, 'next_buses': line_list}
+            return {'bus_stop_name': bus_stop_name, 'bus_stop_id': stop_id, 'updated_at': updated_at, 'next_buses': line_list}
         except Exception, err:
             return json.dumps({"status":"error","message":"Failed to scrape source html"})
 
@@ -87,7 +87,7 @@ class LissuScrape(IPlugin):
             log.debug("From cache: %s" % result.from_cache)
 
             if result.status_code == 200 and result.text:
-                return self._scrape_html_into_json(result.text)
+                return self._scrape_html_into_json(result.text, stop_id)
             else:
                 log.error("Server returned %s" % result.status_code)
                 raise Exception("Server returned %s" % result.status_code)

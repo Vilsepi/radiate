@@ -1,0 +1,9 @@
+[Core]
+Name = ilmatieteenlaitos
+Module = plugin_ilmatieteenlaitos
+
+[Documentation]
+Description = Weather forecast from Finnish Meteorological Institute
+Author = Vilsepi
+Version = 0.1
+Website = http://heap.fi

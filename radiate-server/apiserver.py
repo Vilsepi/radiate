@@ -25,7 +25,7 @@ app = Flask(__name__, static_url_path='/static')
 cors = CORS(app)
 
 @app.route("/api", methods=['GET'])
-def list_active_plugins():
+def list_plugins():
     plugins = []
     for plugin in plugin_manager.getAllPlugins():
         plugins.append(plugin.name)

@@ -99,7 +99,7 @@ class Ilmatieteenlaitos(IPlugin):
             #current_data = self._get_json_data('{}weather?q={}&units=metric&appid={}'.format(REMOTE_API_BASE_URL, CITY, secret.remote_api_key))
             current_data = {"msg": "not implemented"}
 
-            return json.dumps({"status": "ok", "current": current_data, "forecast": forecast_data})
+            return json.dumps({"status": "ok", "current": current_data, "forecast": forecast_data}, indent=1)
 
         except socket.gaierror, err:
             log.error(err)

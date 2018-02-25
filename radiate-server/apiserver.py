@@ -29,7 +29,7 @@ def list_plugins():
     plugins = []
     for plugin in plugin_manager.getAllPlugins():
         plugins.append(plugin.name)
-    return json.dumps({"status": "info", "plugins": plugins})
+    return json.dumps({"status": "info", "plugins": plugins}, indent=1)
 
 @app.route("/api/<plugin>", methods=['GET'])
 def call_plugin(plugin):

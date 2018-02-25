@@ -8,9 +8,8 @@ A simple information radiator displaying local weather forecast and next departi
 
 Backend server:
 
-    sudo apt-get install pip
     cd radiate-server/
-    sudo pip install -r requirements.txt
+    pip install -r requirements.txt
     gunicorn apiserver:app
 
 Frontend running on a "kiosk-mode" browser:
